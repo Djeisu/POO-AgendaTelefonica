@@ -1,54 +1,54 @@
 import java.util.ArrayList;
 
 public class Agenda {
-	private User user;
-	private ArrayList<Contato> Phones;
+	private ArrayList<Contato> People;
 	
 	Agenda(){
-		this.setPhones(new ArrayList<Contato>());
+		this.setPeople(new ArrayList<Contato>());
 	}
 	
 	Agenda(User u){
-		this.setUser(u);
-		this.setPhones(new ArrayList<Contato>());
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public ArrayList<Contato> getPhones() {
-		return Phones;
-	}
-
-	public void setPhones(ArrayList<Contato> phones) {
-		Phones = phones;
+		this.setPeople(new ArrayList<Contato>());
 	}
 	
-	//Métodos
-	public void addAPhoneOfTheList(Contato c) {
-		System.out.println(c.getName() + " é um novo amigo");
-		this.Phones.add(c);
+	public ArrayList<Contato> getPeople() {
+		return People;
+	}
+
+	public void setPeople(ArrayList<Contato> people) {
+		People = people;
+	}
+	
+	//Metodos
+	public boolean addAPhoneOfTheList(Contato c) {
+		for (int i = 0; i < this.People.size(); i++) {
+			Contato tPeople = this.People.get(i);
+			if(tPeople.getName().equals(c.getName())){
+				this.People.get(i).setPhones(c.getPhones().get(0));
+				return true;
+			}
+		}
+		this.People.add(c);
+		return true;
 	}
 	
 	//Comparar pelo numero de telefone puro
-	public void removeAPhoneOfTheList(Contato c) {
-		for (int i = 0; i < Phones.size(); i++) {
-			if(Phones.get(i).getPhone() == c.getPhone()) {
-				System.out.println(Phones.get(i).getName() + " não é mais seu amigo");
-				Phones.remove(i);
+	public void removeAContactOfTheList(Contato c) {
+		for (int i = 0; i < People.size(); i++) {
+			if(People.get(i).getName() == c.getName()) {
+				System.out.println(People.get(i).getName() + " nao eh mais seu amigo");
+				People.remove(i);
 			}			
 		}
 	}
 	
 	public void showPhoneList() {
-		System.out.println("\n -----Seus amigos são:-----");
-		for (Contato contato : Phones) {
-			System.out.println("Nome: " + contato.getName() + " Endereço: " + contato.getAddress() + "Phone: " + "(" + contato.getDDD() + ")" + " " + contato.getPhone() + " Email: " + contato.getEmailAddress());
+		System.out.println("\n -----Seus amigos sao:-----");
+		for (Contato contato : People) {
+			System.out.println(	"Nome: " + contato.getName() + 
+								" Endereco: " + contato.getAddress() + 
+								" Telefone: " + contato.getPhoneNumber() +
+								" Email: " + contato.getEmailAddress());
 		}
-	}
+	}	
 }

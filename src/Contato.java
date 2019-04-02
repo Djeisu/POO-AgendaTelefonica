@@ -1,25 +1,31 @@
+import java.util.ArrayList;
 
 public class Contato {
 	private String name;
 	private String address;
-	private int ddd;
-	private long phone;
+	private ArrayList<Phone> phones;
 	private String emailAddress;
 	
 	Contato(){
-		
+		this.phones = new ArrayList<Phone>();
 	}
 	
-	Contato(int d, long p){
-		this.setDDD(d);
-		this.setPhone(p);
+	Contato(Phone p){
+		this.phones = new ArrayList<Phone>();
+		this.setPhones(p);
 	}
 	
-	Contato(String n, String a,int d, long p, String ea){
+	Contato(String n, Phone p){
+		this.name = n;
+		this.phones = new ArrayList<Phone>();
+		this.setPhones(p);
+	}
+	
+	Contato(String n, String a,Phone p, String ea){
+		this.phones = new ArrayList<Phone>();
 		this.setName(n);
 		this.setAddress(a);
-		this.setDDD(d);
-		this.setPhone(p);
+		this.setPhones(p);
 		this.setEmailAddress(ea);
 	}
 	
@@ -39,12 +45,21 @@ public class Contato {
 		this.address = address;
 	}
 
-	public long getPhone() {
-		return phone;
+	public void setPhones(Phone p){
+		Phone tPhone = new Phone(p.getDdd(),p.getNumber());
+		this.phones.add(tPhone);			
 	}
-
-	public void setPhone(long phone) {
-		this.phone = phone;
+	
+	public String getPhoneNumber(){
+		String p = "";
+		for (Phone ph : this.phones) {
+			p += ph.getFullNumber() + " ";
+		}
+		return p;
+	}
+	
+	public ArrayList<Phone> getPhones() {
+		return this.phones;
 	}
 
 	public String getEmailAddress() {
@@ -53,13 +68,5 @@ public class Contato {
 
 	public void setEmailAddress(String emailAddress) {
 		this.emailAddress = emailAddress;
-	}
-
-	public int getDDD() {
-		return ddd;
-	}
-
-	public void setDDD(int ddd) {
-		this.ddd = ddd;
 	}
 }
