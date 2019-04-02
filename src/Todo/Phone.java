@@ -1,22 +1,21 @@
+package Todo;
 
 public class Phone {
 	private int ddd;
 	private long number;
 	
-	Phone(){
-		
-	}
+	Phone(){}
 	
 	Phone(int d, long n){
-		this.setDdd(d);
+		this.setDDD(d);
 		this.setNumber(n);
 	}
 
-	public int getDdd() {
+	public int getDDD() {
 		return ddd;
 	}
 
-	public void setDdd(int ddd) {
+	public void setDDD(int ddd) {
 		this.ddd = ddd;
 	}
 
@@ -29,6 +28,6 @@ public class Phone {
 	}
 	
 	public String getFullNumber(){
-		return "("+this.ddd+")" + " " + this.number;
+		return "("+this.ddd+")" + " " + this.number + ",";
 	}
 }

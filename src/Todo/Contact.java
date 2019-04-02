@@ -1,32 +1,44 @@
+package Todo;
 import java.util.ArrayList;
+import Todo.Exceptions.TestException;
 
-public class Contato {
+public class Contact {
 	private String name;
 	private String address;
 	private ArrayList<Phone> phones;
 	private String emailAddress;
+	private TestException ex;
 	
-	Contato(){
+	Contact(){
+		this.ex = new TestException();
 		this.phones = new ArrayList<Phone>();
 	}
 	
-	Contato(Phone p){
+	Contact(String n){
+		this.ex = new TestException();
+		this.setName(n);
+	}
+	
+	Contact(Phone p){
+		this.ex = new TestException();
 		this.phones = new ArrayList<Phone>();
 		this.setPhones(p);
 	}
 	
-	Contato(String n, Phone p){
+	Contact(String n, Phone p){
+		this.ex = new TestException();
 		this.name = n;
 		this.phones = new ArrayList<Phone>();
 		this.setPhones(p);
 	}
 	
-	Contato(String n, String a,Phone p, String ea){
+	Contact(String n, String a,Phone p, String ea){
+		this.ex = new TestException();
 		this.phones = new ArrayList<Phone>();
 		this.setName(n);
 		this.setAddress(a);
+		this.setEmailAddress(ea);		
 		this.setPhones(p);
-		this.setEmailAddress(ea);
 	}
 	
 	public String getName() {
@@ -46,8 +58,13 @@ public class Contato {
 	}
 
 	public void setPhones(Phone p){
-		Phone tPhone = new Phone(p.getDdd(),p.getNumber());
-		this.phones.add(tPhone);			
+		try{
+			this.ex.MaxNumberPhones(this.getPhones().size());
+			Phone tPhone = new Phone(p.getDDD(),p.getNumber());
+			this.phones.add(tPhone);			
+		}catch(Exception e){
+			System.out.println(e);
+		}
 	}
 	
 	public String getPhoneNumber(){
